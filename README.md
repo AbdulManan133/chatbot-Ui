@@ -84,9 +84,10 @@ Easy to customize with CSS variables:
 
 ## 📄 License
 
-MIT License - feel free to use in your projects!
+Feel free to use it in your projects!😉
 
 ---
 
 
 Made with ❤️ for developers. Star this repo if you find it useful!
+
