@@ -1,6 +1,6 @@
 # Reusable Chatbot UI 🚀
 
-A beautiful, reusable chatbot interface for modern websites. This chatbot UI comes with smooth animations, gradient designs, and a professional look.
+A modern, responsive, and customizable chatbot UI that fits seamlessly into any website. Lightweight, smooth, and easy to integrate — perfect for your next AI-powered project!
 
 ![Chatbot UI Demo](gif/Chatbot_ui.gif)
 
@@ -94,6 +94,7 @@ Feel free to use it in your projects!😉
 
 
 Made with ❤️ for developers. Star this repo if you find it useful!
+
 
 
 
