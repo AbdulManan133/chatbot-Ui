@@ -33,7 +33,6 @@ class ReusableChatbot {
 
         // State management
         this.isOpen = false;
-        this.isMinimized = false;
         this.isTyping = false;
         this.messageHistory = [];
         this.currentUser = 'user';
@@ -75,7 +74,6 @@ class ReusableChatbot {
             input: document.getElementById('message-input'),
             sendBtn: document.getElementById('send-btn'),
             refreshBtn: document.getElementById('refresh-btn'),
-            minimizeBtn: document.getElementById('minimize-btn'),
             closeBtn: document.getElementById('close-btn'),
             typingIndicator: document.getElementById('typing-indicator'),
             emojiBtn: document.getElementById('emoji-btn')
@@ -103,7 +101,6 @@ class ReusableChatbot {
 
         // Control buttons
         this.elements.refreshBtn.addEventListener('click', () => this.refreshChat());
-        this.elements.minimizeBtn.addEventListener('click', () => this.minimizeChat());
         this.elements.closeBtn.addEventListener('click', () => this.closeChat());
 
         // Additional features
@@ -140,9 +137,7 @@ class ReusableChatbot {
      */
     openChat() {
         this.isOpen = true;
-        this.isMinimized = false;
         this.elements.container.classList.add('show');
-        this.elements.container.classList.remove('minimized');
         this.elements.toggle.classList.add('active');
         
         // Focus input
@@ -160,8 +155,7 @@ class ReusableChatbot {
      */
     closeChat() {
         this.isOpen = false;
-        this.isMinimized = false;
-        this.elements.container.classList.remove('show', 'minimized');
+        this.elements.container.classList.remove('show');
         this.elements.toggle.classList.remove('active');
         
         // Track event
@@ -188,23 +182,7 @@ class ReusableChatbot {
         this.trackEvent('chatbot_refreshed');
     }
 
-    /**
-     * Minimize chatbot
-     */
-    minimizeChat() {
-        this.isMinimized = !this.isMinimized;
-        this.elements.container.classList.toggle('minimized');
-        
-        if (!this.isMinimized) {
-            setTimeout(() => {
-                this.elements.input.focus();
-                this.scrollToBottom();
-            }, 300);
-        }
 
-        // Track event
-        this.trackEvent('chatbot_minimized', { minimized: this.isMinimized });
-    }
 
     /**
      * Send user message
@@ -329,7 +307,7 @@ class ReusableChatbot {
 
         const avatar = document.createElement('div');
         avatar.className = 'message-avatar';
-        avatar.innerHTML = messageData.sender === 'bot' ? '<i class="fas fa-robot"></i>' : '<i class="fas fa-user"></i>';
+        avatar.innerHTML = messageData.sender === 'bot' ? '<i class="fas fa-brain"></i>' : '<i class="fas fa-user"></i>';
 
         const content = document.createElement('div');
         content.className = 'message-content';

@@ -283,10 +283,7 @@ body {
     display: flex;
 }
 
-.chatbot-container.minimized {
-    height: 60px;
-    overflow: hidden;
-}
+
 
 @keyframes slideUp {
     from {
@@ -313,13 +310,43 @@ body {
 .bot-avatar {
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px;
     backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.bot-avatar::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+.bot-avatar i {
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
 }
 
 .bot-info {
@@ -393,9 +420,35 @@ body {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
-    background: #f8fafc;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+    position: relative;
     scrollbar-width: thin;
     scrollbar-color: #cbd5e1 transparent;
+}
+
+.chatbot-messages::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
 }
 
 .chatbot-messages::-webkit-scrollbar {
@@ -452,6 +505,26 @@ body {
 .bot-message .message-avatar {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.bot-message .message-avatar::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 4s infinite;
+}
+
+.bot-message .message-avatar i {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
 }
 
 .user-message .message-avatar {
@@ -729,7 +802,14 @@ body {
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     .chatbot-messages {
-        background: #1f2937;
+        background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #1e293b 100%);
+    }
+    
+    .chatbot-messages::before {
+        background-image: 
+            radial-gradient(circle at 20% 80%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 40% 40%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
     }
 
     .bot-message .message-bubble {
