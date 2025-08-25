@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Chatbot UI - Integration Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .guide-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .guide-section h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .guide-section h3 {
+            color: #555;
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            color: #e0e0e0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .warning {
+            background: #fef3cd;
+            border: 1px solid #fde047;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #f59e0b;
+        }
+
+        .warning strong {
+            color: #92400e;
+        }
+
+        .tip {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .tip strong {
+            color: #1e40af;
+        }
+
+        .file-structure {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+            margin: 1rem 0;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .icon {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .guide-section {
+                padding: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .code-block {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Integration Guide</h1>
+            <p>Step-by-step guide to integrate Reusable Chatbot UI into your website</p>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">1</span> Download & Setup</h2>
+            <p>First, download the required files and organize your project structure.</p>
+
+            <h3>Required Files</h3>
+            <div class="file-structure">
+your-website/
+├── css/
+│   └── chatbot.css
+├── js/
+│   └── chatbot.js
+└── index.html
+            </div>
+
+            <div class="tip">
+                <strong>💡 Tip:</strong> You can also use a CDN link if you host these files on a CDN service for better performance.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">2</span> HTML Structure</h2>
+            <p>Add the chatbot HTML structure to your webpage. Place this before the closing <span class="highlight">&lt;/body&gt;</span> tag.</p>
+
+            <div class="code-block">
+                <pre><code>&lt;!-- Include Font Awesome for icons --&gt;
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+
+&lt;!-- Include Google Fonts (recommended) --&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"&gt;
+
+&lt;!-- Include the chatbot CSS --&gt;
+&lt;link rel="stylesheet" href="css/chatbot.css"&gt;</code></pre>
+            </div>
+
+            <h3>Chatbot Container</h3>
+            <div class="code-block">
+                <pre><code>&lt;!-- Reusable Chatbot Widget --&gt;
+&lt;div id="reusable-chatbot"&gt;
+    &lt;!-- Chatbot Toggle Button --&gt;
+    &lt;div class="chatbot-toggle" id="chatbot-toggle"&gt;
+        &lt;i class="fas fa-comments"&gt;&lt;/i&gt;
+        &lt;div class="pulse-ring"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- Chatbot Container --&gt;
+    &lt;div class="chatbot-container" id="chatbot-container"&gt;
+        &lt;!-- Header with refresh, minimize, close buttons --&gt;
+        &lt;!-- Messages, Input sections --&gt;
+        &lt;!-- See full HTML in index.html --&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Make sure to include all the required HTML elements with the correct IDs. The JavaScript depends on these specific element IDs to function properly.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">3</span> JavaScript Integration</h2>
+            <p>Include the JavaScript file and initialize the chatbot with your configuration.</p>
+
+            <div class="code-block">
+                <pre><code>&lt;!-- Include the chatbot JavaScript --&gt;
+&lt;script src="js/chatbot.js"&gt;&lt;/script&gt;
+
+&lt;!-- Initialize the chatbot --&gt;
+&lt;script&gt;
+document.addEventListener('DOMContentLoaded', function() {
+    new ReusableChatbot({
+        botName: 'Your Assistant',
+        welcomeMessage: 'Hello! How can I help you today?',
+        responses: {
+            'hello': 'Hi there! Welcome to our website!',
+            'help': 'I\'m here to help! What do you need?',
+            'contact': 'You can reach us at support@example.com',
+            'default': 'Thanks for your message! How can I assist you?'
+        }
+    });
+});
+&lt;/script&gt;</code></pre>
+            </div>
+
+            <h3>Configuration Options</h3>
+            <div class="code-block">
+                <pre><code>new ReusableChatbot({
+    // Basic settings
+    botName: 'Customer Support',
+    welcomeMessage: 'Hi! How can we help you today?',
+    
+    // API integration
+    apiEndpoint: 'https://your-api.com/chat',
+    
+    // Predefined responses
+    responses: {
+        'pricing': 'Our plans start at $19/month',
+        'features': 'We offer analytics, automation, and support',
+        'demo': 'Schedule a demo at demo.yoursite.com',
+        'default': 'Let me help you with that!'
+    },
+    
+    // Timing settings
+    typingDelay: 1000,        // Bot typing delay (ms)
+    messageDelay: 500,        // Message display delay (ms)
+    
+    // UI settings
+    autoOpen: false,          // Auto-open on page load
+    theme: 'default'          // Theme name
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">4</span> API Integration</h2>
+            <p>Connect the chatbot to your backend API for dynamic responses.</p>
+
+            <h3>Frontend Configuration</h3>
+            <div class="code-block">
+                <pre><code>new ReusableChatbot({
+    apiEndpoint: 'https://api.yoursite.com/chat',
+    // Other options...
+});</code></pre>
+            </div>
+
+            <h3>Backend API Format</h3>
+            <p>Your API should accept POST requests with this format:</p>
+            <div class="code-block">
+                <pre><code>// Request format
+{
+    "message": "user message text",
+    "history": [
+        {"sender": "user", "content": "previous message", "timestamp": "..."},
+        {"sender": "bot", "content": "previous response", "timestamp": "..."}
+    ]
+}
+
+// Response format
+{
+    "message": "bot response text"
+}</code></pre>
+            </div>
+
+            <h3>Example Node.js Backend</h3>
+            <div class="code-block">
+                <pre><code>const express = require('express');
+const app = express();
+
+app.use(express.json());
+app.use(cors()); // Enable CORS for cross-origin requests
+
+app.post('/chat', async (req, res) => {
+    const { message, history } = req.body;
+    
+    try {
+        // Your AI/bot logic here
+        // Example: OpenAI, Dialogflow, custom NLP, etc.
+        
+        const response = await generateBotResponse(message, history);
+        
+        res.json({ message: response });
+    } catch (error) {
+        res.status(500).json({ 
+            message: 'Sorry, I\'m having trouble right now. Please try again.' 
+        });
+    }
+});
+
+app.listen(3000, () => {
+    console.log('Chat API running on port 3000');
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">5</span> Customization</h2>
+            <p>Customize the appearance and behavior to match your brand.</p>
+
+            <h3>Color Customization</h3>
+            <div class="code-block">
+                <pre><code>/* Override default colors */
+:root {
+    --chatbot-primary: linear-gradient(135deg, #your-color-1, #your-color-2);
+    --chatbot-secondary: #your-background-color;
+    --chatbot-text: #your-text-color;
+    --chatbot-border: #your-border-color;
+}
+
+/* Custom theme example */
+.chatbot-container.my-brand {
+    --chatbot-primary: linear-gradient(135deg, #ff6b6b, #ee5a24);
+}</code></pre>
+            </div>
+
+            <h3>Advanced Responses</h3>
+            <div class="code-block">
+                <pre><code>new ReusableChatbot({
+    responses: {
+        // Simple keyword matching
+        'price': 'Our pricing starts at $29/month',
+        'pricing': 'Our pricing starts at $29/month',
+        
+        // Multiple keywords for same response
+        'help': 'How can I help you today?',
+        'support': 'How can I help you today?',
+        'assist': 'How can I help you today?',
+        
+        // Default fallback
+        'default': 'I understand you said "{message}". Let me help you with that!'
+    }
+});</code></pre>
+            </div>
+
+            <div class="tip">
+                <strong>💡 Pro Tip:</strong> The <span class="highlight">{message}</span> placeholder in the default response gets replaced with the user's actual message.
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">6</span> Testing & Debugging</h2>
+            <p>Ensure everything works correctly before going live.</p>
+
+            <h3>Quick Test Checklist</h3>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>✅ Chatbot toggle button appears in bottom-right corner</li>
+                <li>✅ Clicking toggle opens/closes the chatbot</li>
+                <li>✅ Welcome message displays when opened</li>
+                <li>✅ User can type and send messages</li>
+                <li>✅ Bot responds with appropriate messages</li>
+                <li>✅ Typing indicator appears before bot responses</li>
+                <li>✅ Minimize and close buttons work</li>
+                <li>✅ Mobile responsive design works properly</li>
+            </ul>
+
+            <h3>Debug Mode</h3>
+            <div class="code-block">
+                <pre><code>// Enable debug logging
+new ReusableChatbot({
+    debug: true, // This will log events to console
+    // ... other options
+});
+
+// Check chatbot stats
+console.log(window.reusableChatbot.getStats());</code></pre>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Common Issues:</strong><br>
+                • Make sure Font Awesome CSS is loaded before the chatbot<br>
+                • Check that all element IDs match the JavaScript expectations<br>
+                • Verify your API endpoint returns the correct JSON format<br>
+                • Test on different screen sizes and browsers
+            </div>
+        </div>
+
+        <div class="guide-section">
+            <h2><span class="step">7</span> Production Checklist</h2>
+            <p>Final steps before deploying to production.</p>
+
+            <h3>Performance Optimization</h3>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>🚀 Minify CSS and JavaScript files</li>
+                <li>🚀 Use CDN for Font Awesome and Google Fonts</li>
+                <li>🚀 Enable gzip compression on your server</li>
+                <li>🚀 Optimize images and icons</li>
+                <li>🚀 Test loading speed</li>
+            </ul>
+
+            <h3>Security Considerations</h3>
+            <ul style="margin-left: 2rem; margin-top: 1rem;">
+                <li>🔒 Validate and sanitize all user inputs on server</li>
+                <li>🔒 Use HTTPS for all API endpoints</li>
+                <li>🔒 Implement rate limiting to prevent abuse</li>
+                <li>🔒 Add CSRF protection for sensitive operations</li>
+                <li>🔒 Monitor and log chat interactions</li>
+            </ul>
+
+            <h3>Analytics Integration</h3>
+            <div class="code-block">
+                <pre><code>new ReusableChatbot({
+    // Custom event tracking
+    onMessage: (message) => {
+        // Google Analytics example
+        gtag('event', 'chatbot_message_sent', {
+            'message_length': message.length
+        });
+    },
+    
+    onBotResponse: (response) => {
+        gtag('event', 'chatbot_response_received');
+    }
+});</code></pre>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="btn btn-secondary">
+                <i class="fas fa-arrow-left icon"></i>
+                Back to Demo
+            </a>
+            <a href="#" class="btn" onclick="window.print(); return false;">
+                <i class="fas fa-print icon"></i>
+                Print Guide
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity to the guide
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.addEventListener('click', function() {
+                // Select code text for easy copying
+                const range = document.createRange();
+                range.selectNodeContents(this);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
+            });
+            
+            // Add copy indicator
+            block.style.cursor = 'pointer';
+            block.title = 'Click to select code for copying';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

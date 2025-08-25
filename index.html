@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reusable Chatbot UI - Demo</title>
+    <link rel="stylesheet" href="chatbot.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Demo Page Content -->
+    <header class="demo-header">
+        <div class="container">
+            <h1>Reusable Chatbot UI</h1>
+            <p>A beautiful, reusable chatbot interface for modern websites</p>
+            <div class="header-actions">
+                <a href="integration-guide.html" class="integration-guide-btn">
+                    <i class="fas fa-book"></i>
+                    <span>Integration Guide</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#demo" class="demo-btn">
+                    <i class="fas fa-play"></i>
+                    <span>Try Demo</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="demo-content">
+        <div class="container">
+            <section class="features">
+                <h2>Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-palette"></i>
+                        <h3>Modern Design</h3>
+                        <p>Modern gradient UI with smooth animations</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h3>Responsive</h3>
+                        <p>Perfect on desktop, tablet, and mobile devices</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-plug"></i>
+                        <h3>Easy Integration</h3>
+                        <p>Drop-in solution with minimal setup required</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Customizable</h3>
+                        <p>Easy to theme and modify for your brand</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="integration" id="demo">
+                <h2>Quick Integration</h2>
+                <div class="code-block">
+                    <pre><code>&lt;!-- Include the CSS --&gt;
+&lt;link rel="stylesheet" href="chatbot.css"&gt;
+
+&lt;!-- Include the JavaScript --&gt;
+&lt;script src="chatbot.js"&gt;&lt;/script&gt;
+
+&lt;!-- Initialize the chatbot --&gt;
+&lt;script&gt;
+    new ReusableChatbot({
+        apiEndpoint: 'your-api-endpoint',
+        botName: 'Your Bot Name',
+        welcomeMessage: 'Hello! How can I help you today?'
+    });
+&lt;/script&gt;</code></pre>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Reusable Chatbot Widget -->
+    <div id="reusable-chatbot">
+        <!-- Chatbot Toggle Button -->
+        <div class="chatbot-toggle" id="chatbot-toggle">
+            <i class="fas fa-comments"></i>
+            <div class="pulse-ring"></div>
+        </div>
+
+        <!-- Chatbot Container -->
+        <div class="chatbot-container" id="chatbot-container">
+            <!-- Chatbot Header -->
+            <div class="chatbot-header">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="bot-info">
+                    <h3>AI Assistant</h3>
+                    <span class="status">
+                        <span class="status-dot"></span>
+                        Online
+                    </span>
+                </div>
+                <div class="chatbot-controls">
+                    <button class="refresh-btn" id="refresh-btn" title="Clear chat">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="minimize-btn" id="minimize-btn">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="close-btn" id="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chatbot Messages -->
+            <div class="chatbot-messages" id="chatbot-messages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            Hello! 👋 I'm your AI assistant. How can I help you today?
+                        </div>
+                        <div class="message-time">just now</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="typing-bubble">
+                    <div class="typing-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chatbot Input -->
+            <div class="chatbot-input">
+                <div class="input-container">
+                    <input type="text" id="message-input" placeholder="Type your message..." maxlength="500">
+                    <div class="input-actions">
+                        <button class="emoji-btn" id="emoji-btn">
+                            <i class="far fa-smile"></i>
+                        </button>
+                        <button class="send-btn" id="send-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="input-footer">
+                    <span class="powered-by">Created by Abdul Manan</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="chatbot.js"></script>
+    <script>
+        // Initialize the demo chatbot
+        document.addEventListener('DOMContentLoaded', function() {
+            new ReusableChatbot({
+                botName: 'AI Assistant',
+                welcomeMessage: 'Hello! 👋 I\'m your AI assistant. How can I help you today?',
+                responses: {
+                    'hello': 'Hello there! How can I assist you today?',
+                    'hi': 'Hi! What can I help you with?',
+                    'help': 'I\'m here to help! You can ask me questions about our services, products, or anything else you\'d like to know.',
+                    'features': 'This chatbot features a modern design, responsive layout, smooth animations, and easy integration!',
+                    'default': 'I understand you\'re saying "{message}". This is a demo chatbot, so I have limited responses. In a real implementation, this would connect to your AI service!'
+                }
+            });
+
+            // Smooth scroll for demo button
+            const demoBtn = document.querySelector('.demo-btn');
+            if (demoBtn) {
+                demoBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector('#demo');
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
