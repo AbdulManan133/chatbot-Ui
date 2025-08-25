@@ -53,7 +53,7 @@ new ReusableChatbot({
 
 ## 📖 Integration Guide
 
-For detailed setup instructions, customization options, and API integration, check out our [Integration Guide](integration-guide.html).
+For detailed setup instructions, customization options, and API integration, check out [Integration Guide](integration-guide.html).
 
 ## ⚙️ Configuration Options
 
@@ -87,5 +87,6 @@ Easy to customize with CSS variables:
 MIT License - feel free to use in your projects!
 
 ---
+
 
 Made with ❤️ for developers. Star this repo if you find it useful!
