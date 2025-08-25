@@ -2,7 +2,7 @@
 
 A beautiful, reusable chatbot interface for modern websites. This chatbot UI comes with smooth animations, gradient designs, and a professional look that works out of the box.
 
-![Chatbot UI Demo](Chatbot_ui.gif)
+![Chatbot UI Demo](gif/Chatbot_ui.gif)
 
 ## ✨ Features
 
@@ -90,4 +90,5 @@ Feel free to use it in your projects!😉
 
 
 Made with ❤️ for developers. Star this repo if you find it useful!
+
 
